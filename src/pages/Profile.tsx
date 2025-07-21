@@ -203,7 +203,7 @@ const Profile = () => {
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Profile Information */}
-        <Card>
+        <Card className="card-elegant">
           <CardHeader>
             <CardTitle>Personal Information</CardTitle>
           </CardHeader>
@@ -254,7 +254,7 @@ const Profile = () => {
 
             {isEditing && (
               <div className="flex gap-2">
-                <Button onClick={handleSave} disabled={saving}>
+                <Button onClick={handleSave} disabled={saving} className="btn-primary border-0 text-white">
                   {saving ? 'Saving...' : 'Save Changes'}
                 </Button>
                 <Button variant="outline" onClick={() => setIsEditing(false)}>
@@ -266,7 +266,7 @@ const Profile = () => {
         </Card>
 
         {/* Task Statistics */}
-        <Card>
+        <Card className="card-elegant">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
@@ -279,17 +279,17 @@ const Profile = () => {
                 <div className="text-2xl font-bold text-foreground">{taskStats.total}</div>
                 <div className="text-sm text-muted-foreground">Total Tasks</div>
               </div>
-              <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                <div className="text-2xl font-bold text-green-600">{taskStats.completed}</div>
-                <div className="text-sm text-muted-foreground">Completed</div>
+              <div className="text-center p-4 bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 rounded-lg border border-emerald-200/50">
+                <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{taskStats.completed}</div>
+                <div className="text-sm text-emerald-600/70 dark:text-emerald-400/70">Completed</div>
               </div>
-              <div className="text-center p-4 bg-orange-50 dark:bg-orange-950/20 rounded-lg">
-                <div className="text-2xl font-bold text-orange-600">{taskStats.pending}</div>
-                <div className="text-sm text-muted-foreground">Pending</div>
+              <div className="text-center p-4 bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 rounded-lg border border-amber-200/50">
+                <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{taskStats.pending}</div>
+                <div className="text-sm text-amber-600/70 dark:text-amber-400/70">Pending</div>
               </div>
-              <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">{taskStats.todayTasks}</div>
-                <div className="text-sm text-muted-foreground">Today's Tasks</div>
+              <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 rounded-lg border border-blue-200/50">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{taskStats.todayTasks}</div>
+                <div className="text-sm text-blue-600/70 dark:text-blue-400/70">Today's Tasks</div>
               </div>
             </div>
 

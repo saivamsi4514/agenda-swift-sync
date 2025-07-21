@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -96,19 +96,22 @@ const AddTaskDialog = ({ onTaskAdded, variant = 'default' }: AddTaskDialogProps)
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {variant === 'icon' ? (
-          <Button size="sm">
+          <Button size="sm" className="btn-primary border-0 text-white hover:shadow-lg">
             <Plus className="h-4 w-4" />
           </Button>
         ) : (
-          <Button>
+          <Button className="btn-primary border-0 text-white hover:shadow-lg">
             <Plus className="h-4 w-4 mr-2" />
             Add New Task
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] card-elegant border-primary/20">
         <DialogHeader>
-          <DialogTitle>Create New Task</DialogTitle>
+          <DialogTitle className="text-xl">Create New Task</DialogTitle>
+          <DialogDescription>
+            Add a new task to your list. AI will automatically prioritize it for you.
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
@@ -150,7 +153,7 @@ const AddTaskDialog = ({ onTaskAdded, variant = 'default' }: AddTaskDialogProps)
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit" disabled={loading || !formData.title.trim()}>
+            <Button type="submit" disabled={loading || !formData.title.trim()} className="btn-primary border-0 text-white">
               {loading ? 'Creating...' : 'Create Task'}
             </Button>
           </div>

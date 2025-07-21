@@ -129,13 +129,13 @@ const Dashboard = () => {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'High':
-        return 'text-red-500 bg-red-50 border-red-200';
+        return 'priority-high';
       case 'Medium':
-        return 'text-yellow-500 bg-yellow-50 border-yellow-200';
+        return 'priority-medium';
       case 'Low':
-        return 'text-green-500 bg-green-50 border-green-200';
+        return 'priority-low';
       default:
-        return 'text-gray-500 bg-gray-50 border-gray-200';
+        return 'text-muted-foreground bg-muted border-border';
     }
   };
 
@@ -160,10 +160,12 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card">
+      <header className="border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">TaskMaster</h1>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              TaskMaster
+            </h1>
             <p className="text-sm text-muted-foreground">
               {greeting()}, {profile?.full_name || user?.email?.split('@')[0]}! 🌟
             </p>
@@ -172,6 +174,7 @@ const Dashboard = () => {
             <Button
               variant="outline"
               size="icon"
+              className="hover:bg-primary/5 border-primary/20"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
               {theme === 'dark' ? (
@@ -180,13 +183,13 @@ const Dashboard = () => {
                 <Moon className="h-4 w-4" />
               )}
             </Button>
-            <Button variant="outline" asChild>
+            <Button variant="outline" className="hover:bg-primary/5 border-primary/20" asChild>
               <Link to="/profile">
                 <User className="h-4 w-4 mr-2" />
                 Profile
               </Link>
             </Button>
-            <Button variant="outline" onClick={handleSignOut}>
+            <Button variant="outline" className="hover:bg-destructive/5 border-destructive/20 hover:text-destructive" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
               Sign Out
             </Button>
@@ -197,12 +200,12 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Welcome Section */}
-        <Card className="mb-8 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
-          <CardContent className="p-6">
-            <h2 className="text-xl font-semibold mb-2 text-foreground">
+        <Card className="mb-8 card-elegant gradient-bg border-0">
+          <CardContent className="p-8">
+            <h2 className="text-2xl font-bold mb-3 text-white">
               Ready to conquer your day?
             </h2>
-            <p className="text-muted-foreground italic mb-4">
+            <p className="text-white/90 italic mb-6 text-lg">
               "{todayQuote}"
             </p>
             <AddTaskDialog onTaskAdded={fetchTasks} />
@@ -211,44 +214,50 @@ const Dashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+          <Card className="card-elegant stats-card">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary"></div>
                 Total Tasks
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-foreground">{tasks.length}</div>
+              <div className="text-3xl font-bold text-foreground">{tasks.length}</div>
+              <p className="text-xs text-muted-foreground mt-1">All time</p>
             </CardContent>
           </Card>
           
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+          <Card className="card-elegant bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-950/20 dark:to-emerald-900/20 border-emerald-200/50">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
                 Completed
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{completedTasks.length}</div>
+              <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-400">{completedTasks.length}</div>
+              <p className="text-xs text-emerald-600/70 dark:text-emerald-400/70 mt-1">Great progress!</p>
             </CardContent>
           </Card>
           
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+          <Card className="card-elegant bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 border-amber-200/50">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-amber-700 dark:text-amber-400 flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-amber-500"></div>
                 Pending
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-orange-600">{pendingTasks.length}</div>
+              <div className="text-3xl font-bold text-amber-700 dark:text-amber-400">{pendingTasks.length}</div>
+              <p className="text-xs text-amber-600/70 dark:text-amber-400/70 mt-1">Keep going!</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Tasks Section */}
-        <Card>
+        <Card className="card-elegant">
           <CardHeader>
-            <CardTitle className="flex items-center justify-between">
+            <CardTitle className="flex items-center justify-between text-xl">
               Your Tasks
               <AddTaskDialog onTaskAdded={fetchTasks} variant="icon" />
             </CardTitle>
@@ -273,7 +282,7 @@ const Dashboard = () => {
                   .map((task) => (
                     <div
                       key={task.id}
-                      className="flex items-start space-x-3 p-4 rounded-lg border border-border bg-card"
+                      className="flex items-start space-x-3 p-4 rounded-xl border border-border/50 bg-card/50 hover:bg-card/80 transition-all duration-200 hover:shadow-md"
                     >
                       <input
                         type="checkbox"

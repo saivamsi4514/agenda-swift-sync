@@ -158,10 +158,12 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Welcome to TaskMaster</CardTitle>
-          <CardDescription>
+      <Card className="w-full max-w-md card-elegant">
+        <CardHeader className="text-center">
+          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Welcome to TaskMaster
+          </CardTitle>
+          <CardDescription className="text-base">
             Your intelligent personal task assistant
           </CardDescription>
         </CardHeader>
@@ -209,7 +211,7 @@ const Auth = () => {
                     </Button>
                   </div>
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button type="submit" className="w-full btn-primary border-0 text-white" disabled={isLoading}>
                   {isLoading ? "Signing in..." : "Sign In"}
                 </Button>
                 <Button
@@ -271,7 +273,7 @@ const Auth = () => {
                     </Button>
                   </div>
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button type="submit" className="w-full btn-primary border-0 text-white" disabled={isLoading}>
                   {isLoading ? "Creating account..." : "Create Account"}
                 </Button>
               </form>
