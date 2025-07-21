@@ -3,9 +3,11 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, Moon, Sun, LogOut } from 'lucide-react';
+import { Plus, Moon, Sun, LogOut, User } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { useToast } from '@/hooks/use-toast';
+import AddTaskDialog from '@/components/AddTaskDialog';
+import { Link } from 'react-router-dom';
 
 interface Task {
   id: string;
@@ -178,6 +180,12 @@ const Dashboard = () => {
                 <Moon className="h-4 w-4" />
               )}
             </Button>
+            <Button variant="outline" asChild>
+              <Link to="/profile">
+                <User className="h-4 w-4 mr-2" />
+                Profile
+              </Link>
+            </Button>
             <Button variant="outline" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
               Sign Out
@@ -197,10 +205,7 @@ const Dashboard = () => {
             <p className="text-muted-foreground italic mb-4">
               "{todayQuote}"
             </p>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Add New Task
-            </Button>
+            <AddTaskDialog onTaskAdded={fetchTasks} />
           </CardContent>
         </Card>
 
@@ -245,9 +250,7 @@ const Dashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               Your Tasks
-              <Button size="sm">
-                <Plus className="h-4 w-4" />
-              </Button>
+              <AddTaskDialog onTaskAdded={fetchTasks} variant="icon" />
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -258,10 +261,7 @@ const Dashboard = () => {
             ) : tasks.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-muted-foreground mb-4">No tasks yet. Ready to start being productive?</p>
-                <Button>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Create Your First Task
-                </Button>
+                <AddTaskDialog onTaskAdded={fetchTasks} />
               </div>
             ) : (
               <div className="space-y-4">
